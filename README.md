@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎒 Lost & Found Portal (Ongoing Project)  
 
-## Getting Started
+This is an **ongoing Major Project**: a web-based **Lost & Found system for college campuses**.  
+The idea is to allow students to **report, search, and recover lost items** in a simple, cloud-enabled portal.  
 
-First, run the development server:
+We are currently working on the **frontend (Next.js + TailwindCSS)** and will later integrate the backend, database, and cloud deployment.  
+
+---
+
+## 🚧 Project Status  
+
+- ✅ Project idea finalized  
+- ✅ Initial frontend setup (Next.js + TailwindCSS)  
+- 🔄 Designing core pages (Home, Navbar, Footer)  
+- ⏳ Backend (Node.js / FastAPI) → To be developed  
+- ⏳ Database (MySQL / MongoDB) → Planned  
+- ⏳ Cloud Deployment (AWS/Docker) → Planned  
+
+---
+
+## ✨ Planned Features  
+
+- 🖥️ **Modern UI** with Next.js + TailwindCSS  
+- 🔑 **Authentication**: Secure login for students & admins  
+- 📸 **Image Upload** for lost/found items  
+- 🔍 **Search & Filter** to easily find items  
+- 📢 **Notifications** via email/SMS when items match  
+- ☁ **Cloud Ready**: Dockerized, deployable on AWS/Azure/GCP  
+- 🤖 **Optional AI Matching** using image/text recognition  
+
+---
+
+## 🏗️ Current Project Structure  
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+lost-found-portal/
+│── app/                # Next.js App Router pages
+│   ├── components/     # Navbar, Footer (in progress)
+│   ├── page.jsx        # Home Page (in progress)
+│── public/             # Static files (GIFs, images, icons)
+│── styles/             # Global CSS
+│── package.json        # Dependencies
+│── README.md           # Project documentation
+```
+## 🚀 Getting Started (Development)
+### 1️⃣ Clone the repo
+```bash 
+git clone https://github.com/your-username/lost-found-portal.git
+cd lost-found-portal
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 3️⃣ Run the dev server
+```bash
+npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Now open http://localhost:3000 🎉
+```
 
-## Learn More
+## 📦 Future Deployment Plan
 
-To learn more about Next.js, take a look at the following resources:
+- Docker → Containerize app for portability
+- Vercel → Initial frontend deployment
+- AWS (EC2, RDS, S3, Cognito) → Full deployment
+- Kubernetes → For scaling in larger environments
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 👨‍💻 Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Frontend: Next.js 14, React, TailwindCSS
+- Backend (Planned): Node.js / FastAPI
+- Database (Planned): MySQL / MongoDB
+- Cloud (Planned): AWS (EC2, RDS, S3, Cognito), Docker, Kubernetes
 
-## Deploy on Vercel
+## 📅 Roadmap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ Project setup with Next.js + TailwindCSS
+- ⌛Navbar + Footer
+- ⌛Home Page content
+- ⌛Authentication system
+- ⌛Report Lost / Found form
+- ⌛Database integration
+- ⌛Cloud deployment
+- ⌛Notifications & AI matching
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 💫 Design
+Design the layout of website something like "https://custo-saas.webflow.io/"
+## 📜 License
+
+This project will be licensed under the MIT License once released.
+
+## 🎯 Why this project?
+
+Lost & Found portals exist in big organizations but are often missing in campuses.
+This project aims to solve a real-world student problem while showcasing skills in Cloud Computing & Virtualization.
+It’s currently under development as a Major Project.
+
+## Teammates
+- Harshita Bisht
+- Sneha Singh
+- Pradyuman Singh
+- Himanshu P
