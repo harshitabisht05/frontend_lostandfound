@@ -1,12 +1,3 @@
-/*
-|--------------------------------------------------------------------------
-| globals.css
-|--------------------------------------------------------------------------
-|
-| This file contains the custom CSS definitions and base styles required
-| for the Lost & Found Portal component. It should be imported globally.
-|
-*/
 @import "tailwindcss";/* Base style for the body, applied globally */
 body {
     /* Sets font, background color, and default text color to match the component's inline <style> block */

@@ -1,8 +1,8 @@
-// /components/Navbar.js
+// /components/Navbar.js (Updated)
 "use client";
 
 import { useState } from 'react';
-import { MenuIcon } from './Icons'; // Import the icon
+import { MenuIcon, CompassIcon } from './Icons'; // Import MenuIcon AND CompassIcon
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,9 +10,13 @@ export default function Navbar() {
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-opacity-30 backdrop-blur-md border-b border-slate-700/50">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                {/* Logo */}
-                <a href="#" className="text-2xl font-bold text-white">
-                    L&F<span className="gradient-text">Portal</span>
+                
+                {/* Logo: Icon + Text */}
+                <a href="#" className="flex items-center space-x-2 text-2xl font-bold text-white">
+                    <CompassIcon className="w-7 h-7 gradient-text" /> {/* Use the new icon with gradient */}
+                    <span>
+                        <span className="gradient-text">FindMyStuff</span>
+                    </span>
                 </a>
 
                 {/* Desktop Navigation */}
