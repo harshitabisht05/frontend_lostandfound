@@ -1,0 +1,39 @@
+@import "tailwindcss";/* Base style for the body, applied globally */
+body {
+    /* Sets font, background color, and default text color to match the component's inline <style> block */
+    font-family: 'Inter', sans-serif; /* Assumes 'Inter' is available via a link tag or similar global setup */
+    background-color: #0B1120;
+    color: #d1d5db;
+}
+
+/* Custom CSS Definitions from the inline <style> block */
+
+/* Defines the gradient for key text elements like the logo and headlines */
+.gradient-text {
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Defines the background gradient for CTA buttons */
+.cta-button {
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+}
+
+/* Adds a slight brightness change on hover for the CTA button gradient */
+.cta-button:hover {
+    filter: brightness(1.1);
+}
+
+/* Styles for the main content cards (e.g., How It Works, Final CTA) */
+.card {
+    background-color: #1E293B;
+    border: 1px solid #334155;
+}
+
+/* Hover effect for the feature cards (How It Works steps) */
+.feature-card-hover:hover {
+    transform: translateY(-5px);
+    /* Adds a subtle shadow with the primary color for a visual lift effect */
+    box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.1), 0 4px 6px -2px rgba(56, 189, 248, 0.05);
+}
