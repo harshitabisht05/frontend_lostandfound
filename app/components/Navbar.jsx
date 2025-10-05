@@ -23,7 +23,7 @@ export default function Navbar() {
                 <nav className="hidden md:flex items-center space-x-8">
                     <a href="#how-it-works" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">How It Works</a>
                     <a href="#recent-items" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Recent Items</a>
-                    <a href="#testimonials" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Testimonials</a>
+                    <a href="/team" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Our Team</a>
                 </nav>
 
                 {/* CTA Buttons */}

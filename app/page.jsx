@@ -2,9 +2,9 @@
 
 import Navbar from './components/Navbar';
 import FeatureCard from './components/FeatureCard';
-import TestimonialCard from './components/TestimonialCard';
 import CallToAction from './components/CallToAction';
-import { FilePenLineIcon, SearchIcon, Link2Icon, TwitterIcon, InstagramIcon, FacebookIcon } from './components/Icons';
+import { FilePenLineIcon, SearchIcon, Link2Icon} from './components/Icons';
+import Footer from './components/Footer';
 
 // Mock data (for clean separation)
 const features = [
@@ -25,20 +25,6 @@ const features = [
     },
 ];
 
-const testimonials = [
-    {
-        quote: "I thought my laptop was gone forever after I left it in the lab. I reported it here and got a notification the next day! I'm so grateful for this platform.",
-        name: "Sarah Johnson",
-        role: "Computer Science Student",
-        avatarUrl: "https://i.pravatar.cc/150?img=1"
-    },
-    {
-        quote: "Finding a wallet and not knowing who it belongs to is stressful. I posted it on the portal, and the owner contacted me within hours. It was so easy and efficient.",
-        name: "Mike Chen",
-        role: "Business Administration Student",
-        avatarUrl: "https://i.pravatar.cc/150?img=32"
-    },
-];
 
 export default function HomePage() {
     return (
@@ -139,27 +125,7 @@ export default function HomePage() {
                         </div>
                     </div>
                 </section>
-                
-                {/* Testimonials Section */}
-                <section id="testimonials" className="py-20">
-                    <div className="container mx-auto px-6">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold text-white">Success Stories from Students</h2>
-                            <p className="text-slate-400 mt-4 max-w-2xl mx-auto">Don't just take our word for it. Hear from students who've been helped by the portal.</p>
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-8">
-                            {testimonials.map((t, index) => (
-                                <TestimonialCard 
-                                    key={index}
-                                    quote={t.quote} 
-                                    name={t.name}
-                                    role={t.role}
-                                    avatarUrl={t.avatarUrl}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </section>
+
                 
                 {/* Final CTA Section (Reusable Component) */}
                 <CallToAction />
@@ -167,50 +133,7 @@ export default function HomePage() {
             </main>
 
             {/* Footer */}
-            <footer className="border-t border-slate-800">
-                <div className="container mx-auto px-6 py-12">
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {/* About */}
-                        <div>
-                            <a href="#" className="text-2xl font-bold text-white">
-                            L&F<span className="gradient-text">Portal</span>
-                            </a>
-                            <p className="text-slate-400 mt-4 max-w-xs">[Your College Name]'s official platform for lost and found items.</p>
-                        </div>
-                        {/* Links */}
-                        <div className="grid grid-cols-2 gap-8">
-                            <div>
-                                <h4 className="font-bold text-white mb-4">Quick Links</h4>
-                                <ul className="space-y-3">
-                                    <li><a href="#" className="text-slate-400 hover:text-sky-400">Report Lost</a></li>
-                                    <li><a href="#" className="text-slate-400 hover:text-sky-400">Post Found</a></li>
-                                    <li><a href="#" className="text-slate-400 hover:text-sky-400">My Account</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-white mb-4">Resources</h4>
-                                <ul className="space-y-3">
-                                    <li><a href="#" className="text-slate-400 hover:text-sky-400">About Us</a></li>
-                                    <li><a href="#" className="text-slate-400 hover:text-sky-400">Contact Admin</a></li>
-                                    <li><a href="#" className="text-slate-400 hover:text-sky-400">College Website</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        {/* Socials */}
-                        <div>
-                            <h4 className="font-bold text-white mb-4">Connect With Us</h4>
-                            <div className="flex space-x-4">
-                                <a href="#" className="text-slate-400 hover:text-sky-400"><TwitterIcon /></a>
-                                <a href="#" className="text-slate-400 hover:text-sky-400"><InstagramIcon /></a>
-                                <a href="#" className="text-slate-400 hover:text-sky-400"><FacebookIcon /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-500">
-                        &copy; 2024 Your College Name. All Rights Reserved.
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }
