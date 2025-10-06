@@ -28,8 +28,8 @@ export default function Navbar() {
 
                 {/* CTA Buttons */}
                 <div className="hidden md:flex items-center space-x-4">
-                    <a href="#" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Log In</a>
-                    <a href="#" className="bg-slate-700 text-white font-semibold px-4 py-2 rounded-lg hover:bg-slate-600 transition-colors duration-300">Sign Up</a>
+                    <a href="/login" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Log In</a>
+                    <a href="/signup" className="bg-slate-700 text-white font-semibold px-4 py-2 rounded-lg hover:bg-slate-600 transition-colors duration-300">Sign Up</a>
                 </div>
                 
                 {/* Mobile Menu Button */}
