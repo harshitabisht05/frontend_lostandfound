@@ -1,8 +1,14 @@
-"use client";
+"use client"; // Add this directive for client-side interactivity (useState)
 
 import { useState } from 'react';
 
-// Icons (used in sections, not nav)
+// It's better to use an icon library like lucide-react, 
+// but for a single file, we can define the icons as components.
+const MenuIcon = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+    </svg>
+);
 const FilePenLineIcon = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5"/><polyline points="14 2 14 8 20 8"/><path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21l-2.83 0.94c-1.33.44-2.28-0.51-1.84-1.84l0.94-2.83Z"/></svg>
 );
@@ -23,6 +29,8 @@ const FacebookIcon = (props) => (
 );
 
 export default function HomePage() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     return (
         <>
             <style>{`
@@ -76,20 +84,123 @@ export default function HomePage() {
                         </div>
                     </section>
 
-                    {/* Remaining sections (How It Works, Recently Found, Testimonials, Final CTA) remain unchanged */}
-                    {/* ... copy everything from your previous code except the header/nav */}
+                    {/* How It Works Section */}
+                    <section id="how-it-works" className="py-20">
+                        <div className="container mx-auto px-6">
+                            <div className="text-center mb-16">
+                                <h2 className="text-3xl md:text-4xl font-bold text-white">A Simple, Three-Step Process</h2>
+                                <p className="text-slate-400 mt-4 max-w-2xl mx-auto">Finding your lost items has never been easier. Follow these simple steps.</p>
+                            </div>
+                            <div className="grid md:grid-cols-3 gap-8">
+                                {/* Step 1 */}
+                                <div className="card p-8 rounded-xl text-center feature-card-hover transition-all duration-300">
+                                    <div className="mx-auto bg-slate-800 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                                        <FilePenLineIcon className="w-8 h-8 text-sky-400" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white mb-3">1. Report an Item</h3>
+                                    <p className="text-slate-400">Fill out a quick form with details about what you lost or found. Be as descriptive as possible!</p>
+                                </div>
+                                {/* Step 2 */}
+                                <div className="card p-8 rounded-xl text-center feature-card-hover transition-all duration-300">
+                                    <div className="mx-auto bg-slate-800 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                                        <SearchIcon className="w-8 h-8 text-sky-400" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white mb-3">2. Search & Get Notified</h3>
+                                    <p className="text-slate-400">Our system automatically searches for matches. You'll get notified if a potential match is posted.</p>
+                                </div>
+                                {/* Step 3 */}
+                                <div className="card p-8 rounded-xl text-center feature-card-hover transition-all duration-300">
+                                    <div className="mx-auto bg-slate-800 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                                        <Link2Icon className="w-8 h-8 text-sky-400" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white mb-3">3. Connect & Reclaim</h3>
+                                    <p className="text-slate-400">Connect securely with the finder or owner through the portal to arrange a pickup.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Recent Items Section */}
+<section id="recent-items" className="py-20 bg-slate-900/30">
+    <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Recently Reported Items</h2>
+            <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
+                Stay updated with the latest lost and found items in our campus community.
+            </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+            {/* Example Item 1 */}
+            <div className="card p-6 rounded-xl feature-card-hover transition-all duration-300">
+                <div className="bg-slate-800 rounded-lg h-40 flex items-center justify-center mb-4">
+                    <span className="text-slate-400 text-lg">📱 Phone</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">iPhone 14</h3>
+                <p className="text-slate-400 text-sm mb-2">Lost near Library, 2 hours ago</p>
+                <a href="#" className="text-sky-400 font-semibold hover:underline text-sm">View Details</a>
+            </div>
+
+            {/* Example Item 2 */}
+            <div className="card p-6 rounded-xl feature-card-hover transition-all duration-300">
+                <div className="bg-slate-800 rounded-lg h-40 flex items-center justify-center mb-4">
+                    <span className="text-slate-400 text-lg">🎒 Bag</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Black Backpack</h3>
+                <p className="text-slate-400 text-sm mb-2">Found in Cafeteria, 1 day ago</p>
+                <a href="#" className="text-sky-400 font-semibold hover:underline text-sm">View Details</a>
+            </div>
+
+            {/* Example Item 3 */}
+            <div className="card p-6 rounded-xl feature-card-hover transition-all duration-300">
+                <div className="bg-slate-800 rounded-lg h-40 flex items-center justify-center mb-4">
+                    <span className="text-slate-400 text-lg">💻 Laptop</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Dell XPS 15</h3>
+                <p className="text-slate-400 text-sm mb-2">Lost in Lab 3, 3 hours ago</p>
+                <a href="#" className="text-sky-400 font-semibold hover:underline text-sm">View Details</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+                    {/* Our Mission Section */}
+                    <section id="our-mission" className="py-20 bg-slate-900/50">
+                        <div className="container mx-auto px-6 text-center">
+                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Our Mission</h2>
+                            <p className="text-slate-400 max-w-3xl mx-auto text-lg md:text-xl">
+                                We believe that a lost item shouldn't mean a lost day. Our goal is to leverage technology to foster a helpful campus environment where honesty is rewarded and belongings are quickly returned to their rightful owners. We aim to reduce the stress and anxiety associated with losing personal items.
+                            </p>
+                        </div>
+                    </section>
+
+                                        
+                    {/* Final CTA Section */}
+                    <section className="py-20">
+                        <div className="container mx-auto px-6">
+                            <div className="card rounded-xl p-10 md:p-16 text-center">
+                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Find What's Yours?</h2>
+                                <p className="text-slate-400 mb-8 max-w-2xl mx-auto">Join the community and help make our campus a place where nothing stays lost for long. Sign up now to post an item or browse the listings.</p>
+                                <a href="/signup" className="cta-button text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 hover:scale-105 inline-block">
+                                    Get Started Now
+                                </a>
+                            </div>
+                        </div>
+                    </section>
                 </main>
 
                 {/* Footer */}
                 <footer className="border-t border-slate-800">
                     <div className="container mx-auto px-6 py-12">
                         <div className="grid md:grid-cols-3 gap-8">
+                            {/* About */}
                             <div>
                                 <a href="/" className="text-2xl font-bold text-white">
-                                    L&F<span className="gradient-text">Portal</span>
+                                L&F<span className="gradient-text">Portal</span>
                                 </a>
                                 <p className="text-slate-400 mt-4 max-w-xs">UPES's official platform for lost and found items.</p>
                             </div>
+                            {/* Links */}
                             <div className="grid grid-cols-2 gap-8">
                                 <div>
                                     <h4 className="font-bold text-white mb-4">Quick Links</h4>
@@ -102,12 +213,14 @@ export default function HomePage() {
                                 <div>
                                     <h4 className="font-bold text-white mb-4">Resources</h4>
                                     <ul className="space-y-3">
+                                        {/* CORRECTED LINKS BELOW */}
                                         <li><a href="/about" className="text-slate-400 hover:text-sky-400">About Us</a></li>
                                         <li><a href="/contact" className="text-slate-400 hover:text-sky-400">Contact Admin</a></li>
                                         <li><a href="#" className="text-slate-400 hover:text-sky-400">College Website</a></li>
                                     </ul>
                                 </div>
                             </div>
+                            {/* Socials */}
                             <div>
                                 <h4 className="font-bold text-white mb-4">Connect With Us</h4>
                                 <div className="flex space-x-4">
@@ -126,3 +239,4 @@ export default function HomePage() {
         </>
     );
 }
+

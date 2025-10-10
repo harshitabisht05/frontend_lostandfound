@@ -30,9 +30,9 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#about" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">About</a>
-          <a href="#recent-items" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Recent Items</a>
-          <a href="#team" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Our Team</a>
+          <a href="/about" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">About</a>
+          {/* <a href="#recent-items" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Recent Items</a> */}
+          <a href="team" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Our Team</a>
 
           {isLoggedIn && (
             <a href="/dashboard" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">

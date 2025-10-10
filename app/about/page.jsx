@@ -39,29 +39,6 @@ export default function AboutPage() {
             `}</style>
             
             <div className="w-full antialiased">
-                {/* Simplified Header */}
-                <header className="fixed top-0 left-0 right-0 z-50 bg-opacity-30 backdrop-blur-md border-b border-slate-700/50">
-                    <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                        <a href="/" className="text-2xl font-bold text-white">
-                            L&F<span className="gradient-text">Portal</span>
-                        </a>
-                        <div className="hidden md:flex items-center space-x-4">
-                            <a href="/login" className="text-slate-300 hover:text-sky-400 transition-colors duration-300">Log In</a>
-                            <a href="/signup" className="bg-slate-700 text-white font-semibold px-4 py-2 rounded-lg hover:bg-slate-600 transition-colors duration-300">Sign Up</a>
-                        </div>
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-white">
-                            <MenuIcon />
-                        </button>
-                    </div>
-                     {/* Mobile Menu */}
-                     <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden px-6 pb-4`}>
-                        <div className="border-t border-slate-700 mt-4 pt-4 flex flex-col space-y-3">
-                            <a href="/login" className="text-slate-300 hover:text-sky-400">Log In</a>
-                            <a href="/signup" className="bg-slate-700 text-white text-center font-semibold px-4 py-2 rounded-lg hover:bg-slate-600">Sign Up</a>
-                        </div>
-                    </div>
-                </header>
-
                 <main className="pt-24">
                     {/* Hero Section */}
                     <section className="py-20 md:py-28">
