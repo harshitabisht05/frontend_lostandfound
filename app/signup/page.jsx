@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-// Reusable Input component for the form
 const FormInput = ({ id, type, placeholder, value, onChange, label }) => (
   <div>
     <label htmlFor={id} className="block text-sm font-medium text-slate-300 mb-2">
@@ -23,13 +22,13 @@ const FormInput = ({ id, type, placeholder, value, onChange, label }) => (
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
@@ -37,36 +36,27 @@ export default function SignUpPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const validateCollegeEmail = (email) => {
-    const emailRegex = /^[\w-\.]+@(?:stu\.)?upes\.ac\.in$/;
-    return emailRegex.test(email);
-  };
+  const validateCollegeEmail = (email) => /^[\w-\.]+@(?:stu\.)?upes\.ac\.in$/.test(email);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
-    // Validate fields
     if (!validateCollegeEmail(formData.email)) {
-      setError('Please use a valid college email address (e.g., your.id@stu.upes.ac.in).');
+      setError("Please use a valid UPES college email (e.g., your.id@stu.upes.ac.in)");
       return;
     }
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
-    if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters long.');
+      setError("Passwords do not match.");
       return;
     }
 
-    // Make API call
-    setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      setLoading(true);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           fullName: formData.fullName,
           email: formData.email,
@@ -75,123 +65,47 @@ export default function SignUpPage() {
       });
 
       const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Signup failed");
 
-      if (res.ok) {
-        setSuccess('✅ Sign up successful! Redirecting...');
-        console.log('User registered:', data);
+      // Save token and user
+      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-        // Optional: redirect after delay
-        setTimeout(() => {
-          window.location.href = '/login';
-        }, 2000);
-      } else {
-        setError(data.message || 'Something went wrong. Please try again.');
-      }
+      setSuccess("✅ Account created! Redirecting...");
+      setTimeout(() => (window.location.href = "/dashboard"), 2000);
     } catch (err) {
-      console.error('Signup error:', err);
-      setError('Server error. Please try again later.');
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <>
-      <style>{`
-        body {
-          font-family: 'Inter', sans-serif;
-          background-color: #0B1120;
-          color: #d1d5db;
-        }
-        .gradient-text {
-          background: linear-gradient(90deg, #38bdf8, #818cf8);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        .cta-button {
-          background: linear-gradient(90deg, #38bdf8, #818cf8);
-        }
-        .cta-button:hover {
-          filter: brightness(1.1);
-        }
-      `}</style>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-[#0B1120] text-slate-200">
+      <div className="w-full max-w-md bg-slate-900/50 border border-slate-700 p-8 rounded-2xl shadow-lg">
+        <h2 className="text-center text-2xl font-bold mb-6">
+          Create Your <span className="text-sky-400">L&F Portal</span> Account
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <FormInput id="fullName" type="text" placeholder="Sneha Sharma" value={formData.fullName} onChange={handleInputChange} label="Full Name" />
+          <FormInput id="email" type="email" placeholder="your.id@stu.upes.ac.in" value={formData.email} onChange={handleInputChange} label="College Email" />
+          <FormInput id="password" type="password" placeholder="••••••••" value={formData.password} onChange={handleInputChange} label="Password" />
+          <FormInput id="confirmPassword" type="password" placeholder="••••••••" value={formData.confirmPassword} onChange={handleInputChange} label="Confirm Password" />
 
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-8">
-            <a href="/" className="text-3xl font-bold text-white">
-              L&F<span className="gradient-text">Portal</span>
-            </a>
-            <h2 className="mt-4 text-2xl font-bold text-white">Create Your Account</h2>
-            <p className="text-slate-400">Join the community to find and post items.</p>
-          </div>
+          {error && <p className="text-red-400 text-sm text-center bg-red-900/20 p-2 rounded-lg">{error}</p>}
+          {success && <p className="text-green-400 text-sm text-center bg-green-900/20 p-2 rounded-lg">{success}</p>}
 
-          <div className="bg-slate-900/50 border border-slate-700 rounded-2xl p-8 shadow-lg">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <FormInput
-                id="fullName"
-                type="text"
-                placeholder="e.g., Sneha Sharma"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                label="Full Name"
-              />
-              <FormInput
-                id="email"
-                type="email"
-                placeholder="Sneha.107413@stu.upes.ac.in"
-                value={formData.email}
-                onChange={handleInputChange}
-                label="College Email Address"
-              />
-              <FormInput
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={handleInputChange}
-                label="Password"
-              />
-              <FormInput
-                id="confirmPassword"
-                type="password"
-                placeholder="••••••••"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                label="Confirm Password"
-              />
+          <button type="submit" disabled={loading} className="w-full py-3 rounded-lg text-lg font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-500 hover:scale-105 transition">
+            {loading ? "Creating Account..." : "Sign Up"}
+          </button>
+        </form>
 
-              {error && (
-                <p className="text-red-400 text-sm text-center bg-red-900/20 p-3 rounded-lg">
-                  {error}
-                </p>
-              )}
-              {success && (
-                <p className="text-green-400 text-sm text-center bg-green-900/20 p-3 rounded-lg">
-                  {success}
-                </p>
-              )}
-
-              <div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full cta-button text-white font-bold py-3 px-4 rounded-lg text-lg transition-transform duration-300 hover:scale-105 disabled:opacity-50"
-                >
-                  {loading ? 'Creating Account...' : 'Sign Up'}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <p className="text-center text-slate-400 mt-8">
-            Already have an account?{' '}
-            <a href="/login" className="font-medium text-sky-400 hover:underline">
-              Log In
-            </a>
-          </p>
-        </div>
+        <p className="text-center text-slate-400 mt-4">
+          Already have an account?{" "}
+          <a href="/login" className="text-sky-400 hover:underline">Log In</a>
+        </p>
       </div>
-    </>
+    </div>
   );
 }
+

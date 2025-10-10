@@ -3,13 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Reusable Input component
 const FormInput = ({ id, type, placeholder, value, onChange, label }) => (
   <div>
-    <label
-      htmlFor={id}
-      className="block text-sm font-medium text-slate-300 mb-2"
-    >
+    <label htmlFor={id} className="block text-sm font-medium text-slate-300 mb-2">
       {label}
     </label>
     <input
@@ -27,16 +23,13 @@ const FormInput = ({ id, type, placeholder, value, onChange, label }) => (
 
 export default function LoginPage() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -50,24 +43,21 @@ export default function LoginPage() {
 
     try {
       setLoading(true);
-
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.message || "Invalid login credentials");
-      }
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Invalid login credentials");
 
-      // Save JWT token in localStorage
-      localStorage.setItem("token", data.token);
+      // Save token + user info
+      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
       console.log("Login successful:", data);
-
-      // Redirect to home page
-      router.push("/");
+      router.push("/dashboard");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -76,98 +66,25 @@ export default function LoginPage() {
   };
 
   return (
-    <>
-      <style>{`
-        body {
-          font-family: 'Inter', sans-serif;
-          background-color: #0B1120;
-          color: #d1d5db;
-        }
-        .gradient-text {
-          background: linear-gradient(90deg, #38bdf8, #818cf8);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        .cta-button {
-          background: linear-gradient(90deg, #38bdf8, #818cf8);
-        }
-        .cta-button:hover {
-          filter: brightness(1.1);
-        }
-      `}</style>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-[#0B1120] text-slate-200">
+      <div className="w-full max-w-md bg-slate-900/50 border border-slate-700 p-8 rounded-2xl shadow-lg">
+        <h2 className="text-center text-2xl font-bold mb-6">Welcome Back to <span className="text-sky-400">L&F Portal</span></h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <FormInput id="email" type="email" placeholder="your.id@stu.upes.ac.in" value={formData.email} onChange={handleInputChange} label="Email" />
+          <FormInput id="password" type="password" placeholder="••••••••" value={formData.password} onChange={handleInputChange} label="Password" />
 
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-8">
-            <a href="/" className="text-3xl font-bold text-white">
-              L&F<span className="gradient-text">Portal</span>
-            </a>
-            <h1 className="text-2xl font-bold text-white mt-6">
-              Welcome Back
-            </h1>
-            <p className="text-slate-400 mt-2">Log in to access your account.</p>
-          </div>
+          {error && <p className="text-red-400 text-sm text-center bg-red-900/20 p-2 rounded-lg">{error}</p>}
 
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 shadow-lg">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <FormInput
-                id="email"
-                type="email"
-                placeholder="your.id@stu.upes.ac.in"
-                value={formData.email}
-                onChange={handleInputChange}
-                label="College Email Address"
-              />
+          <button type="submit" disabled={loading} className="w-full py-3 rounded-lg text-lg font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-500 hover:scale-105 transition">
+            {loading ? "Logging in..." : "Log In"}
+          </button>
+        </form>
 
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-slate-300"
-                  >
-                    Password
-                  </label>
-                  <a
-                    href="/forgot-password"
-                    className="text-sm text-sky-400 hover:underline"
-                  >
-                    Forgot Password?
-                  </a>
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {error && <p className="text-red-400 text-sm">{error}</p>}
-
-              <div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full cta-button text-white font-bold py-3 px-4 rounded-lg text-lg transition-transform duration-300 hover:scale-105"
-                >
-                  {loading ? "Logging in..." : "Log In"}
-                </button>
-              </div>
-            </form>
-
-            <p className="text-center text-slate-400 mt-8">
-              Don't have an account?{" "}
-              <a href="/signup" className="font-medium text-sky-400 hover:underline">
-                Sign Up
-              </a>
-            </p>
-          </div>
-        </div>
+        <p className="text-center text-slate-400 mt-4">
+          Don’t have an account?{" "}
+          <a href="/signup" className="text-sky-400 hover:underline">Sign Up</a>
+        </p>
       </div>
-    </>
+    </div>
   );
 }

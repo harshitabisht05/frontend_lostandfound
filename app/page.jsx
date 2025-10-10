@@ -113,7 +113,7 @@ export default function HomePage() {
                         <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden px-6 pb-4`}>
                             <a href="#how-it-works" className="block py-2 text-slate-300 hover:text-sky-400">How It Works</a>
                             <a href="#recent-items" className="block py-2 text-slate-300 hover:text-sky-400">Recent Items</a>
-                            <a href="/team" className="block py-2 text-slate-300 hover:text-sky-400">Our Team</a>
+                             <a href="/team" className="block py-2 text-slate-300 hover:text-sky-400">Our Team</a>
                             <div className="border-t border-slate-700 mt-4 pt-4 flex flex-col space-y-3">
                                 <a href="/login" className="text-slate-300 hover:text-sky-400">Log In</a>
                                 <a href="/signup" className="bg-slate-700 text-white text-center font-semibold px-4 py-2 rounded-lg hover:bg-slate-600">Sign Up</a>
