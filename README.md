@@ -38,23 +38,27 @@ lost-found-portal/
 │   ├── components/     # Navbar, Footer (in progress)
 │   ├── page.jsx        # Home Page (in progress)
 │── public/             # Static files (GIFs, images, icons)
-│── styles/             # Global CSS
 │── package.json        # Dependencies
 │── README.md           # Project documentation
 ```
 ## 🚀 Getting Started (Development)
 ### 1️⃣ Clone the repo
 ```bash 
-git clone https://github.com/your-username/lost-found-portal.git
-cd lost-found-portal
+git clone https://github.com/harshitabisht05/frontend_lostandfound.git
+cd frontend_lostandfound
+```
+### 2️⃣ Make `.env.local` file
+```bash
+# Backend API URL
+NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
 ```
 
-### 2️⃣ Install dependencies
+### 3️⃣ Install dependencies
 ```bash
 npm install
 ```
 
-### 3️⃣ Run the dev server
+### 4️⃣ Run the dev server
 ```bash
 npm run dev
 
@@ -71,23 +75,21 @@ Now open http://localhost:3000 🎉
 ## 👨‍💻 Tech Stack
 
 - Frontend: Next.js 14, React, TailwindCSS
-- Backend (Planned): Node.js / FastAPI
-- Database (Planned): MySQL / MongoDB
+- Backend : Node.js
+- Database :MongoDB
 - Cloud (Planned): AWS (EC2, RDS, S3, Cognito), Docker, Kubernetes
 
 ## 📅 Roadmap
 
 - ✅ Project setup with Next.js + TailwindCSS
-- ⌛Navbar + Footer
-- ⌛Home Page content
-- ⌛Authentication system
-- ⌛Report Lost / Found form
-- ⌛Database integration
+- ✅ Navbar + Footer
+- ✅ Page content
+- ✅ Authentication system
+- ✅ Report Lost / Found form
+- ✅ Database integration
 - ⌛Cloud deployment
 - ⌛Notifications & AI matching
 
-## 💫 Design
-Design the layout of website something like "https://custo-saas.webflow.io/"
 ## 📜 License
 
 This project will be licensed under the MIT License once released.
