@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // --- ICONS ---
 const XIcon = (props) => (
@@ -52,7 +52,6 @@ const ReportModal = ({ itemType, onClose }) => {
     description: "",
     image: null,
   });
-
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [preview, setPreview] = useState(null);
@@ -80,7 +79,7 @@ const ReportModal = ({ itemType, onClose }) => {
       data.append("category", formData.category);
       data.append("location", formData.location);
       data.append("date", formData.date);
-      data.append("type", itemType); // ensure type is sent
+      data.append("type", itemType);
       if (formData.description) data.append("description", formData.description);
       if (formData.image) data.append("image", formData.image);
 
@@ -125,13 +124,12 @@ const ReportModal = ({ itemType, onClose }) => {
         </h2>
         <p className="text-slate-400 mb-6">
           {itemType === "lost"
-            ? "Provide details about the item you lost. The more details, the easier it will be to find."
-            : "Describe the item you found to help the owner retrieve it quickly."}
+            ? "Provide details about the item you lost."
+            : "Describe the item you found."}
         </p>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <FormInput id="itemName" label="Item Name" placeholder="e.g., iPhone 14 Pro" value={formData.itemName} onChange={handleChange} />
-          
           <div>
             <label htmlFor="category" className="block text-sm font-medium text-slate-300 mb-2">Category</label>
             <select id="category" name="category" value={formData.category} onChange={handleChange} className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-sky-500 focus:outline-none transition">
@@ -143,15 +141,12 @@ const ReportModal = ({ itemType, onClose }) => {
               <option>Other</option>
             </select>
           </div>
-
           <FormInput id="location" label={itemType === "lost" ? "Last Seen Location" : "Location Found"} value={formData.location} onChange={handleChange} />
           <FormInput id="date" label={itemType === "lost" ? "Date Lost" : "Date Found"} type="date" value={formData.date} onChange={handleChange} />
-          
           <div>
             <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-2">Description</label>
-            <textarea id="description" name="description" rows="3" placeholder="Add details like color, brand, or identifying marks..." value={formData.description} onChange={handleChange} className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:outline-none transition"></textarea>
+            <textarea id="description" name="description" rows="3" placeholder="Add details..." value={formData.description} onChange={handleChange} className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:outline-none transition"></textarea>
           </div>
-
           <div>
             <label htmlFor="image" className="block text-sm font-medium text-slate-300 mb-2">Upload Image (Optional)</label>
             <input type="file" id="image" name="image" accept="image/*" onChange={handleChange} className="w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-700 file:text-sky-300 hover:file:bg-slate-600" />
@@ -179,23 +174,24 @@ const ReportModal = ({ itemType, onClose }) => {
   );
 };
 
-// --- Main Page ---
+// --- Main Report Page ---
 export default function ReportPage() {
   const [modalType, setModalType] = useState(null);
 
+  // 🔒 Redirect if not logged in
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      window.location.href = "/login";
+    }
+  }, []);
+
   return (
     <>
-      <style>{`
-        body { font-family: 'Inter', sans-serif; background-color: #0B1120; color: #d1d5db; }
-        .gradient-text { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .cta-button { background: linear-gradient(90deg, #38bdf8, #818cf8); }
-        .card-hover:hover { transform: translateY(-5px); border-color: #38bdf8; }
-      `}</style>
-
       <section className="py-20 text-center px-6">
         <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4">Lost or Found Something?</h1>
         <p className="text-lg text-slate-400 mb-12 max-w-3xl mx-auto">
-          Help our community by reporting items you found or lost. It's quick, easy, and secure.
+          Help our community by reporting items you found or lost.
         </p>
       </section>
 
@@ -205,7 +201,7 @@ export default function ReportPage() {
             <HelpCircleIcon className="w-12 h-12 text-sky-400" />
           </div>
           <h2 className="text-3xl font-bold text-white mb-3">I Lost Something</h2>
-          <p className="text-slate-400 text-lg">File a report to help us find your lost item. We'll notify you if a match is found.</p>
+          <p className="text-slate-400 text-lg">File a report to help us find your lost item.</p>
         </div>
 
         <div onClick={() => setModalType("found")} className="bg-slate-800 border border-slate-700 p-10 rounded-3xl text-center cursor-pointer transition-all duration-300 card-hover">
@@ -213,7 +209,7 @@ export default function ReportPage() {
             <ArchiveIcon className="w-12 h-12 text-indigo-400" />
           </div>
           <h2 className="text-3xl font-bold text-white mb-3">I Found Something</h2>
-          <p className="text-slate-400 text-lg">Post details about an item you found. Help someone reunite with their belongings.</p>
+          <p className="text-slate-400 text-lg">Post details about an item you found.</p>
         </div>
       </div>
 

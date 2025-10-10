@@ -84,7 +84,7 @@ export default function AboutPage() {
                  {/* Footer */}
                  <footer className="border-t border-slate-800 mt-20">
                     <div className="container mx-auto px-6 py-8 text-center text-slate-500">
-                        &copy; 2024 Your College Name. All Rights Reserved.
+                        &copy; 2024 UPES. All Rights Reserved.
                     </div>
                 </footer>
             </div>
