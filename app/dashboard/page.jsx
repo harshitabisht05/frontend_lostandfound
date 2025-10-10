@@ -83,7 +83,7 @@ export default function DashboardPage() {
               🕵️ View Lost Items
             </a>
             <a
-              href="/found-items"
+              href="/report"
               className="p-4 rounded-lg bg-slate-800 border border-slate-700 hover:border-sky-500 hover:scale-105 transition-transform"
             >
               📦 Report Found Item
